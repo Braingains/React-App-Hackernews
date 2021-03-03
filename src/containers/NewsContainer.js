@@ -17,7 +17,14 @@ const NewsContainer = () => {
     const loadTopStories = () => {
         fetch(`https://hacker-news.firebaseio.com/v0/topstories.json`)
         .then(res => res.json())
-        .then(data => setTopStories(data))
+        .then(data => {
+            const slicedData = data.slice(0, 20)
+            const ipromise = slicedData.map(storyId => {
+                return fetch(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json`)
+                .then(res => res.json())
+            });
+            Promise.all(ipromise).then(data => setStories(data))
+        })
     }
 
     const loadStory = () => {
@@ -25,9 +32,7 @@ const NewsContainer = () => {
         .then(res => res.json())
         .then(data => setStories(data))
     }
-
-
-
+      
 
     return (
         <>
