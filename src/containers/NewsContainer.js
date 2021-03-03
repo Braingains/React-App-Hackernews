@@ -3,16 +3,11 @@ import StoriesList from '../components/StoriesList';
 
 const NewsContainer = () => {
 
-    const [topStories, setTopStories] = useState([]);
     const [stories, setStories] = useState([]);
 
     useEffect(() => {
         loadTopStories()
     }, [])
-
-    useEffect(() => {
-        loadStory()
-    },[topStories])
 
     const loadTopStories = () => {
         fetch(`https://hacker-news.firebaseio.com/v0/topstories.json`)
@@ -32,18 +27,12 @@ const NewsContainer = () => {
             //Promise.all waits for all of the data to come back before adding it to setStories
         })
     }
-
-    const loadStory = () => {
-        fetch(`https://hacker-news.firebaseio.com/v0/item/${topStories[1]}.json`)
-        .then(res => res.json())
-        .then(data => setStories(data))
-    }
       
 
     return (
         <>
         <p>I'm the newsContainer</p>
-        <StoriesList />
+        <StoriesList stories={stories}/>
         </>
     )
 }

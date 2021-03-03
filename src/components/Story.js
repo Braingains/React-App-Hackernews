@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Story = () => {
+const Story = (props) => {
     return (
         <>
-        <p>Hi, I'm a story</p>
+        <h1>{props.title}</h1>
         </>
     )
 }
