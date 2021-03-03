@@ -5,8 +5,13 @@ const StoriesList = (props) => {
 
     return (
         <>
+        <button onClick = { () => {
+            props.orderByTitle()
+        }}
+        > Order by Title</button>
         {props.stories.map((story, index) => {
             return (
+                
                 <Story 
                 key={index}
                 position={index + 1}
@@ -15,7 +20,6 @@ const StoriesList = (props) => {
                 />
             )
         })}
-        <h1>I'm the Stories List</h1>
        
         </>
     )

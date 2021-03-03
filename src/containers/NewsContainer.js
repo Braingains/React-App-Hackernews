@@ -6,6 +6,7 @@ const NewsContainer = () => {
     const [stories, setStories] = useState([]);
 
     useEffect(() => {
+        console.log("use effect")
         loadTopStories()
     }, [])
 
@@ -28,11 +29,26 @@ const NewsContainer = () => {
         })
     }
       
+    const orderByTitle = () => {
+       let newList = stories.sort(function(a, b) {
+            var textA = a.title.toUpperCase();
+            var textB = b.title.toUpperCase();
+            return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+        });
+
+        setStories(newList);
+    //     console.log("clickly click click")
+    //     const newStories = stories.sort((a, b) => a.title.localeCompare(b.title));
+    //     setStories(newStories)
+    }
+
 
     return (
         <>
         <p>I'm the newsContainer</p>
-        <StoriesList stories={stories}/>
+        <StoriesList stories={stories}
+        orderByTitle={orderByTitle}
+        />
         </>
     )
 }
@@ -41,4 +57,4 @@ export default NewsContainer;
 
 
 // https://hacker-news.firebaseio.com/v0/topstories.json 
-// https://hacker-news.firebaseio.com/v0/item/{storyId}.json
+// https://hacker-news.firebaseio.com/v0/item/{storyId}.json}

@@ -4,6 +4,7 @@ const Story = (props) => {
     return (
         <>
         <h1>{props.title}</h1>
+        <a href={props.url}>{props.url}</a>
         </>
     )
 }
